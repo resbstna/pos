@@ -20,6 +20,30 @@ class TransaksiController extends Controller
         return view('transaksi', compact('data'));
     }
 
+    public function invoice(Request $request)
+    {
+
+        $barcode = $request->barcode;
+        $qty = 2;
+        $data = DB::table('items')
+                ->where('barcode', $barcode)
+                ->first();
+        
+
+        $data2 = [
+                    'barcode' => $barcode,
+                    'product' => $data->name,
+                    'price' => $data->price,
+                    'qty' => $qty,
+                ];
+
+        
+
+        $transaksi_sementara = transaksi_sementara::create($data2);
+
+        return $transaksi_sementara;
+    }
+
 
     public function list_transaksi(Request $request)
     {

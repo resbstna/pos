@@ -69,8 +69,6 @@ Route::post('/tambah-items', [ItemsController::class, 'store'])->name('items.sto
 Route::post('/updated-items', [ItemsController::class, 'update'])->name('items.updated');
 
 
-Route::get('/transaksi', [TransaksiController::class, 'index']);
-
 
 Route::get('/report', function () {
     return view('report');
@@ -79,3 +77,6 @@ Route::get('/report', function () {
 
 
 });
+
+Route::get('/transaksi', [TransaksiController::class, 'index']
+);

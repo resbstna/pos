@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class transaksi_sementara extends Model
 {
-    protected $fillable = ['barcode','item','price','qty','discount'];
+    protected $fillable = ['barcode','price','qty'];
 
     protected $table = 'transaksi_sementara';
 }

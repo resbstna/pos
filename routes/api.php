@@ -53,3 +53,6 @@ Route::post('/hapus-users', [UsersController::class, 'destroy'])->name('users.de
 //transaksi
 
 Route::post('/list_transaksi', [TransaksiController::class, 'list_transaksi'])->name('transaksi.list_transaksi');
+
+
+Route::post('/invoice', [TransaksiController::class, 'invoice'])->name('transaksi.invoice');

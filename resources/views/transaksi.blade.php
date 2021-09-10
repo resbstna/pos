@@ -42,7 +42,7 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Barcode</label>
                                                                     <div class="col-sm-6">
-                                                                       <select class ="form-control" id="js-example-basic-multiple" name="barcode" onchange="changebarcode(this.value)">
+                                                                       <select class ="form-control"  name="barcode" id="barcode" onchange="changebarcode(this.value)">
                                                                            @foreach($data as $row)
                                                                        <option value="{{$row->barcode}}">{{$row->barcode}} - {{$row->name}}</option>
                                                                        @endforeach
@@ -189,19 +189,6 @@
 function changebarcode(val) {
 $('#qty').val(0);
 
-// $.ajax({
-//         type:"GET",
-//         url : "/api/invoice",
-//         dataType: "json",
-//         success: function(response){
-//            var price = response.price;
-//         },
-//         error:function(xhr, status, error)
-//         {
-//             var err = eval("(" + xhr.responseText + ")");
-//             alert(err.Message);
-//         }
-//     });
 // var jumlah = val
 //     $('#invoice').val(0);
 
@@ -209,13 +196,16 @@ $('#qty').val(0);
 
 function changeqty(val) {
     
+    var barcode = document.getElementById("barcode").options[document.getElementById("barcode").selectedIndex].value;
+
 $.ajax({
         type:"POST",
-        data: data_post,
-        url : "/api/list_transaksi",
+        data: {barcode: barcode, qty:val},
+        url : "/api/invoice",
         dataType: "json",
         success: function(response){
-           var price = response.price;
+            console.log(response)
+        //    var price = response.price;
         },
         error:function(xhr, status, error)
         {
@@ -223,8 +213,6 @@ $.ajax({
             alert(err.Message);
         }
     });
-// var jumlah = val
-//     $('#invoice').val(0);
 
 }
                             </script>
