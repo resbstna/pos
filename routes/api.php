@@ -51,8 +51,12 @@ Route::post('/hapus-users', [UsersController::class, 'destroy'])->name('users.de
 
 
 //transaksi
-
 Route::post('/list_transaksi', [TransaksiController::class, 'list_transaksi'])->name('transaksi.list_transaksi');
+Route::get('/id_penjualan', [TransaksiController::class, 'id_penjualan'])->name('transaksi.id_penjualan');
+Route::post('/transaksi', [TransaksiController::class, 'index_transaksi'])->name('transaksi.index_transaksi');
 
 
 Route::post('/invoice', [TransaksiController::class, 'invoice'])->name('transaksi.invoice');
+Route::post('/change-qty', [TransaksiController::class, 'change_qty'])->name('transaksi.change-qty');
+Route::post('/hapus-transaksiSementara', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+Route::post('/tambah-transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');

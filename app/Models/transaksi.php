@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class transaksi extends Model
 {
-    use HasFactory;
+    protected $fillable = ['date','kasir','customer','qty','total','note','id_penjualan'];
+
+    protected $table = 'transaksis';
 }

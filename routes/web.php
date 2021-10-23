@@ -74,9 +74,12 @@ Route::get('/report', function () {
     return view('report');
 });
 
+Route::get('/transaksi/{id}', [TransaksiController::class, 'index']
+);
 
+
+Route::post('/tambah-transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
 
 });
 
-Route::get('/transaksi', [TransaksiController::class, 'index']
-);
+

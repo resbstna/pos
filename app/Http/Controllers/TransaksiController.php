@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\items;
 use App\Models\transaksi_sementara;
+use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
@@ -14,27 +15,64 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         $data = items::all();
-        return view('transaksi', compact('data'));
+        $id_penjualan = $id;
+
+        $data_transaksi = DB::table('transaksi_sementara')
+                          ->where('id_penjualan', $id_penjualan)
+                          ->get();
+        return view('transaksi.transaksi', compact('data','data_transaksi','id_penjualan'));
+    }
+
+    public function index_transaksi(Request $request)
+    {
+        $id =  $request->id;
+        $data_transaksi = DB::table('transaksi_sementara')
+        ->where('id_penjualan', $id)
+        ->get();
+
+        $msg = [
+            'data' => view('transaksi.transaksi_list',compact('data_transaksi'))->render(),
+            'transaksi' => $data_transaksi
+        ];
+
+        return response($msg);
+    }
+
+    public function change_qty(Request $request)
+    {
+        $data_transaksi = DB::table('transaksi_sementara')
+        ->where('id', $request->id)
+        ->first();
+
+        $jumlah = $data_transaksi->subtotal * $request->qty;
+        $qty =  DB::table('transaksi_sementara')->where('id',$request->id)->update([
+            'qty' => $request->qty,
+            'subtotal' => $jumlah
+        ]);
+
+        return response($qty);
     }
 
     public function invoice(Request $request)
     {
-
         $barcode = $request->barcode;
-        $qty = 2;
+        $id_penjualan = $request->id_penjualan;
         $data = DB::table('items')
                 ->where('barcode', $barcode)
                 ->first();
         
 
         $data2 = [
+                    'id_penjualan' => $id_penjualan,
                     'barcode' => $barcode,
-                    'product' => $data->name,
+                    'nama' => $data->name,
                     'price' => $data->price,
-                    'qty' => $qty,
+                    'qty' => 0,
+                    'diskon' => 0,
+                    'subtotal' => $data->price
                 ];
 
         
@@ -61,6 +99,17 @@ class TransaksiController extends Controller
     }
 
 
+    public function id_penjualan()
+    {
+        $q=DB::table('transaksi_sementara')->select('id_penjualan')->orderBy('id_penjualan', 'desc')->limit(1)->get();
+        foreach ($q as $no) {
+        $id = $no->id_penjualan + 1;
+        $id_penjualan = ['id_penjualan' => $id ];
+        } 
+        return response($id_penjualan);
+    }
+
+
 
 
 
@@ -82,7 +131,26 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'date' => $request->date,
+            'kasir' => $request->kasir,
+            'customer' => $request->customer,
+            'total' => $request->grand_total,
+            'note' => $request->note,
+            'id_penjualan' => $request->id_penjualan,
+    ];
+
+    $transaksi = transaksi::create($data);
+
+    if($transaksi) {
+        return response()->json([
+            'success' => true,
+            'message' => 'transaksi Created',
+            'data'    => $transaksi  
+        ], 201);
+
+    }
+
     }
 
     /**
@@ -125,8 +193,10 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $hapus =  DB::table('transaksi_sementara')->where('id',$id)->delete();
+          return response($hapus);
     }
 }

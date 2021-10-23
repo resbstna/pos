@@ -212,24 +212,24 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="index.html">
+                                    <a href="/">
                                         <span class="pcoded-micon"></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
+                                    <a href="/categories">
                                         <span class="pcoded-micon"></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Products</span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Kategori</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                        
                                         <li class=" ">
-                                            <a href="icon-themify.html">
+                                            <a href="/units">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Icon</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Unit</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -237,19 +237,29 @@
                                     </ul>
                                 </li>
                                 <li class="active">
-                                    <a href="index.html">
+                                    <a onclick="transaksi()" href="#">
                                         <span class="pcoded-micon"></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Transaksi</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="index.html">
+                                    <a href="/suppliers">
                                         <span class="pcoded-micon"></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Report</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Supplier</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
+                                <li class="active">
+                                    <a href="/items">
+                                        <span class="pcoded-micon"></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Item</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+
                             </ul>
                         </div>
                     </nav>
@@ -339,7 +349,30 @@ var nav = $('.fixed-button');
          nav.removeClass('active');
      }
  });
+
+ function transaksi() {
+    $.ajax({
+        type:"GET",
+        url : "/api/id_penjualan",
+        dataType: "json",
+        success: function(response){
+            console.log(response.id_penjualan)
+        
+         location.href = '/transaksi/'  + response.id_penjualan;
+        },
+        error:function(xhr, status, error)
+        {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+    });
+
+
+}
+
 </script>
+    
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

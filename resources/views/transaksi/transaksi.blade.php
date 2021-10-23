@@ -11,34 +11,32 @@
                                             <div class="col-md-8 col-xl-4">
                                                 <div class="card widget-card-1">
                                                     <div class="card-block-small">
-                                                            <form>
+                                                            <form  id="tambahtransaksi" method="POST" enctype="multipart/form-data">
+                                                                @csrf
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Date</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="date" class="form-control" value="<?= date("Y-m-d"); ?>">
+                                                                        <input type="date" class="form-control" name="date" value="<?= date("Y-m-d"); ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Kasir</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="kasir" id="kasir">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Customer</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="customer" id="customer">
                                                                     </div>
                                                                 </div>
-                                                                
-                                                                                </form>
                                                                         </div>
                                                                     </div>
                                                     </div>
                                             <div class="col-md-8 col-xl-4">
                                                 <div class="card widget-card-1">
                                                     <div class="card-block-small">
-                                                            <form>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Barcode</label>
                                                                     <div class="col-sm-6">
@@ -48,15 +46,8 @@
                                                                        @endforeach
                                                                         </select>
                                                                     </div>
+                                                                    <input type="text" id = "id_penjualan" value="{{$id_penjualan}}" name="id_penjualan" class="form-control" hidden>
                                                                 </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-4 col-form-label">Qty</label>
-                                                                    <div class="col-sm-6">
-                                                                        <input type="number" class="form-control" id="qty" name="qty" onchange="changeqty(this.value)">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                                </form>
                                                                         </div>
                                                                     </div>
                                                     </div>
@@ -65,9 +56,9 @@
                                                     <div class="card-block-small">
                                                         <span class="text-c-yellow">Invoice</span>
                                                                 <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Rp</label>
+                                                        <label class="col-sm-4 col-form-label"></label>
                                                         <div class="col-sm-8">
-                                                             <input type="number" class="form-control" id="qty">
+                                                     <h2 class="tampil-bayar"></h2>
                                                                     </div>
                                                                     </div>
                                                         </div>
@@ -78,24 +69,7 @@
                                             <div class="col-md-12 col-xl-23">
                                                 <div class="card">
                                                     <div class="card-block table-border-style">
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>#</th>
-                                                                        <th>Barcode</th>
-                                                                        <th>Product Item</th>
-                                                                        <th>Price</th>
-                                                                        <th>Qty</th>
-                                                                        <th>Discount Item</th>
-                                                                        <th>Total</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                   <p class="viewdata"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,71 +77,68 @@
                                             <div class="col-md-8 col-xl-4">
                                                 <div class="card widget-card-1">
                                                     <div class="card-block-small">
-                                                            <form>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Sub Total</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" id="subtotal" name="subtotal" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Discount</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="number" class="form-control" name="discount" id="discount" onchange="discount_change(this.value)">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Grand Total</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" id="grand_total">
+                                                                        <input type="text" class="form-control" name="grand_total" id="grand_total_hidden" hidden>
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                                </form>
                                                                         </div>
                                                                     </div>
                                                     </div>
                                             <div class="col-md-8 col-xl-4">
                                                 <div class="card widget-card-1">
                                                     <div class="card-block-small">
-                                                            <form>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Cash</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="cash" id="cash" onchange="change_cash(this.value)">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Change</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="change" id="change">
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                                </form>
                                                                         </div>
                                                                     </div>
                                                     </div>
                                                     <div class="col-md-8 col-xl-4">
                                                         <div class="card widget-card-1">
                                                             <div class="card-block-small">
-                                                                    <form>
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-4 col-form-label">Note</label>
                                                                             <div class="col-sm-6">
-                                                                                <input type="text" class="form-control">
+                                                                                <input type="text" class="form-control" name="note" id="note">
                                                                             </div>
                                                                         </div>
                                                                         
-                                                                                        </form>
                                                                                 </div>
                                                                             </div>
                                                             </div>
                                 <br>
-                                                                <button  type="button" class="btn btn-primary" >
+                                                                <button  type="submit" class="btn btn-primary" >
                                                                                   Process Payment
                                           </button>
                                                 
+                                                                
+                                        </form>
                                             </div>
                                         </div>
                                     </div>
@@ -186,25 +157,70 @@
     $('#js-example-basic-multiple').select2();
 });
 
-function changebarcode(val) {
-$('#qty').val(0);
+function qty(id,qty){
+$.ajax({
+        type:"POST",
+        data: {id: id,qty: qty},
+        url : "/api/change-qty",
+        dataType: "json",
+        success: function(response){
+            console.log(response)
+            dataartikel();
+        //    var price = response.price;
+        },
+        error:function(xhr, status, error)
+        {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+    });
+}
 
-// var jumlah = val
-//     $('#invoice').val(0);
+function formatRupiah(angka, prefix){
+			var number_string = angka.toString().replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
+
+function discount_change(discount){
+
+    var subtotal = document.getElementById("subtotal").value
+    var grand_total = subtotal * discount / 100 
+    document.getElementById("grand_total").value = formatRupiah(Math.round(grand_total) , 'Rp. ')
+    document.getElementById("grand_total_hidden").value = Math.round(grand_total)
 
 }
 
-function changeqty(val) {
+function change_cash(cash){
+    var grand_total = document.getElementById("grand_total_hidden").value
+    var change = cash - grand_total
+    document.getElementById("change").value = change
+
+}
+function changebarcode(val) {
     
     var barcode = document.getElementById("barcode").options[document.getElementById("barcode").selectedIndex].value;
-
+    var id_penjualan = document.getElementById("id_penjualan").value;
 $.ajax({
         type:"POST",
-        data: {barcode: barcode, qty:val},
+        data: {barcode: barcode,id_penjualan: id_penjualan},
         url : "/api/invoice",
         dataType: "json",
         success: function(response){
             console.log(response)
+            dataartikel();
         //    var price = response.price;
         },
         error:function(xhr, status, error)
@@ -217,13 +233,28 @@ $.ajax({
 }
                             </script>
                         <script>
-                            function dataartikel(){
+function dataartikel(){
+    var id_penjualan = document.getElementById("id_penjualan").value;
+    var jumlah = 0
     $.ajax({
-        type:"GET",
-        url : "/api/users",
+        type:"POST",
+        data: {id: id_penjualan},
+        url : "/api/transaksi",
         dataType: "json",
         success: function(response){
+            console.log(response.data);
+            console.log(response.transaksi);
             $('.viewdata').html(response.data);
+            for (var a = 0; a < response.transaksi.length; a++) {
+                console.log(response.transaksi[a].subtotal);
+               jumlah = jumlah + parseInt(response.transaksi[a].subtotal)
+            }
+
+
+            $('.tampil-bayar').text(formatRupiah(jumlah, 'Rp. '));
+            document.getElementById("subtotal").value = formatRupiah(jumlah, 'Rp. ')
+            document.getElementById("grand_total").value = formatRupiah(jumlah, 'Rp. ') 
+            document.getElementById("grand_total_hidden").value = jumlah
         },
         error:function(xhr, status, error)
         {
@@ -248,44 +279,23 @@ $(document).ready(function(){
    }
 });
 
-$('#tambahusers').submit(function(e) {
+$('#tambahtransaksi').submit(function(e) {
   e.preventDefault();
   let formData = new FormData(this);
   $.ajax({
      type:'POST',
-     url: `{{ route('users.store') }}`,
+     url: `{{ route('transaksi.store') }}`,
       data: formData,
       contentType: false,
       processData: false,
-      
       success: (response) => {
-        if (response.error) {
-           if(response.error.name) {
-                   $('#name').addClass('is-invalid');
-                   $('.errorname').html(response.error.name);
-               }
-           if(response.error.email) {
-                   $('#email').addClass('is-invalid');
-                   $('.erroremail').html(response.error.email);
-               }
-           if(response.error.password) {
-                   $('#password').addClass('is-invalid');
-                   $('.errorpassword').html(response.error.password);
-               }
-           if(response.error.password_again) {
-                   $('#password_again').addClass('is-invalid');
-                   $('.errorpassword_again').html(response.error.password_again);
-               }
-        }else{
-
-            $('#inlineForm').modal('hide');
             Swal.fire(
   'Data Berhasil Di Tambah',
   'You clicked the button!',
   'success'
 )
-dataartikel();
-        }
+var id_penjualan = document.getElementById("id_penjualan").value;
+location.href = "/transaksi/" +  (parseInt(id_penjualan) + 1 ) ;
       },
   });
 });
@@ -359,7 +369,7 @@ function hapus(id) {
   if (result.isConfirmed) {
     $.ajax({
             type:"POST",
-            url: '/api/hapus-users',
+            url: '/api/hapus-transaksiSementara',
             data: {id: id},
             dataType: 'json',
             success: function(rows)
