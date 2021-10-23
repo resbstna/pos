@@ -6,6 +6,7 @@
                                                             <th>#</th>
                                                             <th>Name</th>
                                                             <th>Email</th>
+                                                            <th>Role</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -16,6 +17,7 @@
                                                         <td scope="row">{{$a++}}</td>
                                                         <td>{{$row->name}}</td>
                                                         <td>{{$row->email}}</td>
+                                                        <td>{{$row->role}}</td>
                                                         <td>
                                                          <button data-toggle="modal"  data-target="#Edit" data-id="{{$row->id}}" data-name="{{$row->name}}" data-email="{{$row->email}}" data-password="{{$row->password}}" data-password_again="{{$row->password}}"   class="btn btn-warning" > Edit </button>
                                                         <button  onclick="hapus({{$row->id}})"  type="button" class="btn btn-danger" > Hapus </button>   

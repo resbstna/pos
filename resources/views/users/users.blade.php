@@ -65,6 +65,17 @@
     
                                         </div> 
                                     </div> 
+                                    
+                                    <label>Role: </label>
+                                    <div class="form-group">
+                                        <select class ="form-control"  name="role" id="role">
+                                        <option value="supplier">Supplier</option>
+                                        <option value="kasir">Kasir</option>
+                                        <option value="Penjaga Gudang">Penjaga Gudang</option>
+                                         </select>
+                                        </div> 
+                                    
+                                    
                                         <label>Password: </label>
                                     <div class="form-group">
                                         <input type="password" id="password" name="password" class="form-control" placeholder="Password">
@@ -127,6 +138,17 @@
 
                                     </div> 
                                 </div> 
+
+                                <label>Role: </label>
+                                <div class="form-group">
+                                    <select class ="form-control"  name="role" id="role">
+                                    <option value="supplier">Supplier</option>
+                                    <option value="kasir">Kasir</option>
+                                    <option value="Penjaga Gudang">Penjaga Gudang</option>
+                                     </select>
+                                    </div> 
+                                </div> 
+                                
                                     <label>Password: </label>
                                 <div class="form-group">
                                     <input type="password" id="editpassword" name="password" class="form-control" placeholder="Password">

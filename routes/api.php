@@ -46,6 +46,7 @@ Route::get('/categories-list', [ItemsController::class, 'categories'])->name('it
 Route::get('/units-list', [ItemsController::class, 'units'])->name('items.units');
 
 //users
+Route::post('/tambah-users', [UsersController::class, 'store'])->name('users.store');
 Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 Route::post('/hapus-users', [UsersController::class, 'destroy'])->name('users.destroy');
 

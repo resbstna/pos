@@ -49,6 +49,7 @@ class UsersController extends Controller
         $data = [
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
     ];
 
@@ -96,12 +97,14 @@ class UsersController extends Controller
             $user = DB::table('users')->where('id',$request->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'role' => $request->role,
                 'password' => Hash::make($request->password),
             ]);   
         }else{
            $user =  DB::table('users')->where('id',$request->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'role' => $request->role,
                 'password' => Hash::make($request->password),
             ]);
         }
