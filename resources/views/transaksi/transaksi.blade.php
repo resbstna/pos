@@ -112,7 +112,7 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Change</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control" name="change" id="change">
+                                                                        <input type="text" class="form-control" name="change" id="change" readonlyn>
                                                                     </div>
                                                                 </div>
                                                                 
