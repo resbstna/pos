@@ -75,8 +75,6 @@ class TransaksiController extends Controller
                     'subtotal' => $data->price
                 ];
 
-        
-
         $transaksi_sementara = transaksi_sementara::create($data2);
 
         return $transaksi_sementara;
@@ -141,6 +139,31 @@ class TransaksiController extends Controller
     ];
 
     $transaksi = transaksi::create($data);
+
+    
+         // Melakukan Pengurangan pada setiap transaksi
+
+         $data_transaksi = DB::table('transaksi_sementara')
+        ->where('id', $request->id_penjualan)
+        ->first();
+
+
+
+         $items = DB::table('items')
+         ->where('barcode', $data_transaksi->barcode)
+         ->first();
+ 
+          $stock = ($items->stock - $data_transaksi->qty) ;
+ 
+ 
+          $items =  DB::table('items')->where('barcode',$data_transaksi->barcode)->update([
+                      'stock' => $stock,
+                  ]);
+ 
+ 
+         //##########################################################################
+
+         
 
     if($transaksi) {
         return response()->json([
