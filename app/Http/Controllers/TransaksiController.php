@@ -104,6 +104,9 @@ class TransaksiController extends Controller
         $id = $no->id_penjualan + 1;
         $id_penjualan = ['id_penjualan' => $id ];
         } 
+        if(empty($q)){
+            $id_penjualan = 1;
+        }
         return response($id_penjualan);
     }
 
