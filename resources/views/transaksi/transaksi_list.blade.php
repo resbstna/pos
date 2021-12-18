@@ -21,7 +21,7 @@
                                                         <td>{{$row->barcode}}</td>
                                                         <td>{{$row->nama}}</td>
                                                         <td>{{$row->price}}</td>
-                                                        <td><input type="number" class="form-control" value="{{$row->qty}}" name="qty" id ="qty" onchange="qty({{$row->id}},this.value)"> </td>
+                                                        <td><input type="number" class="form-control" value="{{$row->qty}}" name="qty" id ="qty" onchange="qty({{$row->id}},this.value)" value="1">  </td>
                                                         <td>{{$row->diskon}}</td>
                                                         <td>{{$row->subtotal}}</td>
                                                         <td>

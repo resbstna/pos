@@ -47,7 +47,7 @@ class TransaksiController extends Controller
         ->where('id', $request->id)
         ->first();
 
-        $jumlah = $data_transaksi->subtotal * $request->qty;
+        $jumlah = $data_transaksi->price * $request->qty;
         $qty =  DB::table('transaksi_sementara')->where('id',$request->id)->update([
             'qty' => $request->qty,
             'subtotal' => $jumlah

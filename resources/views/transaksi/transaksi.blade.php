@@ -80,7 +80,8 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Sub Total</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control" id="subtotal" name="subtotal" readonly>
+                                                                        <input type="text" class="form-control" id="subtotal" readonly>
+                                                                        <input type="text" class="form-control" id="subtotal_hidden" name="subtotal" hidden>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -112,7 +113,8 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Change</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control" name="change" id="change" readonlyn>
+                                                                        <input type="text" class="form-control" id="change" readonly>
+                                                                        <input type="text" class="form-control" name="change" id="change_hidden" hidden>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -195,18 +197,22 @@ function formatRupiah(angka, prefix){
 
 
 function discount_change(discount){
-
-    var subtotal = document.getElementById("subtotal").value
-    var grand_total = subtotal * discount / 100 
-    document.getElementById("grand_total").value = formatRupiah(Math.round(grand_total) , 'Rp. ')
-    document.getElementById("grand_total_hidden").value = Math.round(grand_total)
-
+    if(discount > 0){
+    var subtotal = document.getElementById("subtotal_hidden").value
+    var hrgDis = parseInt(subtotal) * discount / 100 
+    var GrndTol = parseInt(subtotal) - hrgDis 
+    document.getElementById("grand_total").value = formatRupiah(Math.round(GrndTol) , 'Rp. ')
+    document.getElementById("grand_total_hidden").value = Math.round(GrndTol)
+    }else{
+        dataartikel();
+    }
 }
 
 function change_cash(cash){
     var grand_total = document.getElementById("grand_total_hidden").value
     var change = cash - grand_total
-    document.getElementById("change").value = change
+    document.getElementById("change_hidden").value = change
+    document.getElementById("change").value = formatRupiah(Math.round(change) , 'Rp. ')
 
 }
 function changebarcode(val) {
@@ -253,6 +259,7 @@ function dataartikel(){
 
             $('.tampil-bayar').text(formatRupiah(jumlah, 'Rp. '));
             document.getElementById("subtotal").value = formatRupiah(jumlah, 'Rp. ')
+            document.getElementById("subtotal_hidden").value = jumlah
             document.getElementById("grand_total").value = formatRupiah(jumlah, 'Rp. ') 
             document.getElementById("grand_total_hidden").value = jumlah
         },
