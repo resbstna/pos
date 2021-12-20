@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\categories;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class CategoriesController extends Controller
 {
@@ -57,7 +58,8 @@ class CategoriesController extends Controller
         }
 
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'supplier' => Auth::user()->id
     ];
 
     
@@ -119,11 +121,13 @@ class CategoriesController extends Controller
         }
 
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'supplier' => Auth::user()->id 
     ];
 
     $categories =  DB::table('categories')->where('id',$request->id)->update([
-        'name' => $request->name
+        'name' => $request->name,
+        'supplier' => Auth::user()->id  
     ]);
 
     if($categories) {

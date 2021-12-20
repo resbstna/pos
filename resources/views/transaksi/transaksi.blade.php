@@ -11,7 +11,7 @@
                                             <div class="col-md-8 col-xl-4">
                                                 <div class="card widget-card-1">
                                                     <div class="card-block-small">
-                                                            <form  id="tambahtransaksi" method="POST" enctype="multipart/form-data">
+                                                            <form  action="{{ route('transaksi.store') }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Date</label>
@@ -22,7 +22,7 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-4 col-form-label">Kasir</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" class="form-control" name="kasir" id="kasir">
+                                                                        <input type="text" class="form-control" name="kasir" id="kasir" value="{{Auth::user()->name}}" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -41,6 +41,7 @@
                                                                     <label class="col-sm-4 col-form-label">Barcode</label>
                                                                     <div class="col-sm-6">
                                                                        <select class ="form-control"  name="barcode" id="barcode" onchange="changebarcode(this.value)">
+                                                                       <option value="">Pilih Barang</option>
                                                                            @foreach($data as $row)
                                                                        <option value="{{$row->barcode}}">{{$row->barcode}} - {{$row->name}}</option>
                                                                        @endforeach

@@ -8,6 +8,7 @@ use App\Models\categories;
 use App\Models\units;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ItemsController extends Controller
 {
@@ -85,6 +86,7 @@ class ItemsController extends Controller
             'unit' => $request->unit,
             'price' => $request->price,
             'stock' => $request->stock,
+            'supplier' => Auth::user()->id
     ];
 
     
@@ -158,6 +160,7 @@ class ItemsController extends Controller
             'unit' => $request->unit,
             'price' => $request->price,
             'stock' => $request->stock,
+            'supplier' => Auth::user()->id  
     ];
 
     $items =  DB::table('items')->where('id',$request->id)->update([
@@ -167,6 +170,7 @@ class ItemsController extends Controller
         'unit' => $request->unit,
         'price' => $request->price,
         'stock' => $request->stock,
+        'supplier' => Auth::user()->id 
     ]);
 
     if($items) {

@@ -77,6 +77,9 @@ Route::get('/report', function () {
 Route::get('/transaksi/{id}', [TransaksiController::class, 'index']
 );
 
+Route::get('/logout', [UsersController::class, 'logout']
+);
+
 
 Route::post('/tambah-transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\units;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class UnitsController extends Controller
 {
@@ -57,7 +58,8 @@ class UnitsController extends Controller
         }
 
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'supplier' => Auth::user()->id 
     ];
 
     
@@ -119,11 +121,13 @@ class UnitsController extends Controller
         }
 
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'supplier' => Auth::user()->id
     ];
 
     $units =  DB::table('units')->where('id',$request->id)->update([
-        'name' => $request->name
+        'name' => $request->name,
+        'supplier' => Auth::user()->id 
     ]);
 
     if($units) {

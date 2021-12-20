@@ -126,4 +126,10 @@ class UsersController extends Controller
         return response($hapus);
     }
 
+    public function logout(Request $request) {
+        $request->session()->flush();
+
+        return redirect()->to('/');
+    }
+
 }

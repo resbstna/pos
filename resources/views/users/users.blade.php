@@ -147,7 +147,6 @@
                                     <option value="Penjaga Gudang">Penjaga Gudang</option>
                                      </select>
                                     </div> 
-                                </div> 
                                 
                                     <label>Password: </label>
                                 <div class="form-group">
@@ -268,7 +267,6 @@ $(document).ready(function() {
              modal.find('#editname').attr("value",div.data('name'));
              modal.find('#editemail').attr("value",div.data('email'));
              modal.find('#editpassword').attr("value",div.data('password'));
-             modal.find('#editpassword_again').attr("value",div.data('password_again'));
          });
      });
 
